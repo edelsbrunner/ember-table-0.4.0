@@ -1287,6 +1287,7 @@ Ember.Table.EmberTableComponent = Ember.Component.extend(Ember.AddeparMixins.Sty
   hasFooter: true,
   enableColumnReorder: true,
   enableContentSelection: false,
+  selection: [],
   enableSelection: true,
   columnMode: 'standard',
   selectionMode: 'single',

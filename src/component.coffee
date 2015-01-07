@@ -58,7 +58,9 @@ Ember.AddeparMixins.ResizeHandlerMixin, Ember.AddeparMixins.SelectionMixin,
   # Allow users to select the content of table cells.
   enableContentSelection: no
 
+  selection: []
   enableSelection: yes
+
 
   # Sets which column resizing behavior to use. Possible values are
   # <code>'standard'</code> (resizing a column pushes or pulls all other
