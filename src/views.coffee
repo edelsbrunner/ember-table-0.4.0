@@ -24,10 +24,12 @@ Ember.CollectionView.extend Ember.AddeparMixins.StyleBindingsMixin,
 
 
 Ember.Table.LazyTableBlock = Ember.LazyContainerView.extend
-  classNames:       ['ember-table-table-block']
-  styleBindings:    ['width']
-  itemViewClass:    Ember.computed.alias 'controller.tableRowViewClass'
-  rowHeight:        Ember.computed.alias 'controller.rowHeight'
+  classNames:         ['ember-table-table-block']
+  attributeBindings:  ['tabIndex']
+  styleBindings:      ['width']
+  tabIndex:           -1
+  itemViewClass:      Ember.computed.alias 'controller.tableRowViewClass'
+  rowHeight:          Ember.computed.alias 'controller.rowHeight'
   columns:    null
   content:    null
   scrollLeft: null

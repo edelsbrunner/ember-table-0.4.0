@@ -76,6 +76,10 @@ Ember.Table.ColumnDefinition = Ember.Object.extend
     @set 'savedWidth', width
     @set 'width', width
 
+  isSelected: Ember.computed ->
+    return @get('parentController.selection').contains @get('content')
+  .property 'parentController.selection.length', 'content'
+
   # Set when the table is initialized. Used to resize columns by stealing
   # width from the next column to the right.
   nextColumn: null

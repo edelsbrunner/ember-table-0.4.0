@@ -136,6 +136,7 @@ Ember.Table.EmberTableComponent.extend App.TreeTableExample.TreeDataAdapter,
   # custom properties
   sortAscending: no
   sortColumn: null
+  selection: []
 
   toggleTableCollapse: (event) ->
     @toggleProperty 'isCollapsed'

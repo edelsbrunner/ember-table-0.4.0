@@ -85,6 +85,7 @@ App.FinancialTableComponent = Ember.Table.EmberTableComponent.extend
   # custom properties
   sortAscending: no
   sortColumn: null
+  selection: []
 
   actions:
     toggleTableCollapse: (event) ->
@@ -166,6 +167,10 @@ App.FinancialTableComponent = Ember.Table.EmberTableComponent.extend
     return Ember.A() unless rows
     rows.slice(0, 1)
   .property 'rows'
+
+  content: Ember.computed ->
+    @get('bodyContent').map( (x) -> x.get 'content' )
+  .property 'bodyContent'
 
   orderBy: (item1, item2) ->
     sortColumn = @get 'sortColumn'

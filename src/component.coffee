@@ -1,6 +1,6 @@
 Ember.Table.EmberTableComponent =
 Ember.Component.extend Ember.AddeparMixins.StyleBindingsMixin,
-Ember.AddeparMixins.ResizeHandlerMixin,
+Ember.AddeparMixins.ResizeHandlerMixin, Ember.AddeparMixins.SelectionMixin,
   layoutName: 'components/ember-table'
   classNames:        ['ember-table-tables-container']
   classNameBindings: ['enableContentSelection:ember-table-content-selectable']
@@ -57,6 +57,8 @@ Ember.AddeparMixins.ResizeHandlerMixin,
 
   # Allow users to select the content of table cells.
   enableContentSelection: no
+
+  enableSelection: yes
 
   # Sets which column resizing behavior to use. Possible values are
   # <code>'standard'</code> (resizing a column pushes or pulls all other
@@ -401,35 +403,35 @@ Ember.AddeparMixins.ResizeHandlerMixin,
     @get('persistedSelection').toArray().copy().addObjects(@get('rangeSelection'))
   .property 'persistedSelection.[]', 'rangeSelection.[]'
 
-  click: (event) ->
-    row = @getRowForEvent event
-    return unless row
-    return if @get('selectionMode') is 'none'
-    if @get('selectionMode') is 'single'
-      @get('persistedSelection').clear()
-      @get('persistedSelection').addObject row
-    else
-      if event.shiftKey
-        @get('rangeSelection').clear()
+  #click: (event) ->
+  #  row = @getRowForEvent event
+  #  return unless row
+  #  return if @get('selectionMode') is 'none'
+  #  if @get('selectionMode') is 'single'
+  #    @get('persistedSelection').clear()
+  #    @get('persistedSelection').addObject row
+  #  else
+  #    if event.shiftKey
+  #      @get('rangeSelection').clear()
 
-        lastIndex = @rowIndex(@get('lastSelected'))
-        curIndex  = @rowIndex(@getRowForEvent(event))
+  #      lastIndex = @rowIndex(@get('lastSelected'))
+  #      curIndex  = @rowIndex(@getRowForEvent(event))
 
-        minIndex  = Math.min(lastIndex, curIndex)
-        maxIndex  = Math.max(lastIndex, curIndex)
+  #      minIndex  = Math.min(lastIndex, curIndex)
+  #      maxIndex  = Math.max(lastIndex, curIndex)
 
-        @get('rangeSelection').addObjects @get('bodyContent').slice(minIndex, maxIndex + 1)
-      else
-        if !event.ctrlKey && !event.metaKey
-          @get('persistedSelection').clear()
-          @get('rangeSelection').clear()
-        else
-          @persistSelection()
-        if @get('persistedSelection').contains row
-          @get('persistedSelection').removeObject row
-        else
-          @get('persistedSelection').addObject row
-        @set('lastSelected', row)
+  #      @get('rangeSelection').addObjects @get('bodyContent').slice(minIndex, maxIndex + 1)
+  #    else
+  #      if !event.ctrlKey && !event.metaKey
+  #        @get('persistedSelection').clear()
+  #        @get('rangeSelection').clear()
+  #      else
+  #        @persistSelection()
+  #      if @get('persistedSelection').contains row
+  #        @get('persistedSelection').removeObject row
+  #      else
+  #        @get('persistedSelection').addObject row
+  #      @set('lastSelected', row)
 
   findRow: (content) ->
     for row in @get('bodyContent')
